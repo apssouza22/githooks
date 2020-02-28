@@ -1,0 +1,14 @@
+# Standard git ignore file from the gitignore repo - https://github.com/github/gitignore/blob/master/Go.gitignore
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Mac
+.DS_Store
+
+# idea
+/.idea
+
