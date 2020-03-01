@@ -14,7 +14,7 @@ SYMLINK_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 echo "Running pre-push hook"
 
-"$SYMLINK_DIR"/run-git-lfs.sh "$@"
+#"$SYMLINK_DIR"/run-git-lfs.sh "$@"
 
 "$SYMLINK_DIR"/run-gotest.sh "$HOOK_DIR"
 
