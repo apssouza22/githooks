@@ -4,7 +4,7 @@ GIT_DIR=$(git rev-parse --git-dir)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 
-if [ ! -f $GOPATH/bin/protoc-gen-go ]; then
+if [ ! -f $GOPATH/bin/golint ]; then
   echo "Downloading the Golint..."
   go get -u golang.org/x/lint/golint
 fi

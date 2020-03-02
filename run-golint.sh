@@ -3,7 +3,6 @@
 # if any command inside script returns error, exit and return that error 
 set -e
 
-export GOPATH=~/go
 export GOLINTPATH=${GOPATH}/bin/golint
 
 echo "Running Go lint"
