@@ -14,7 +14,7 @@ SYMLINK_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 echo "Running pre-commit hook"
 
-"$SYMLINK_DIR"/run-golint.sh "$HOOK_DIR"
+"$SYMLINK_DIR"/run-golint-file.sh "$HOOK_DIR"
 # $? stores exit value of the last command
 if [ $? -ne 0 ]; then
   echo "Golint must pass before commit!"
