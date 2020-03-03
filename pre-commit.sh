@@ -1,22 +1,34 @@
 #!/usr/bin/env bash
 
 HOOK_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+GOLINTPATH=${GOPATH}/bin/golint
 
-### Getting the path for the symlink script
-SOURCE="${BASH_SOURCE[0]}"
-while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
-  SYMLINK_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-  SOURCE="$(readlink "$SOURCE")"
-  [[ $SOURCE != /* ]] && SOURCE="$SYMLINK_DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-done
-SYMLINK_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-### END - Getting the path for the symlink script
+echo "Running pre-commit hook..."
 
-echo "Running pre-commit hook"
+echo "Running Go lint..."
+cd "$HOOK_DIR/../.."
 
-"$SYMLINK_DIR"/run-golint-file.sh "$HOOK_DIR"
-# $? stores exit value of the last command
-if [ $? -ne 0 ]; then
-  echo "Golint must pass before commit!"
-  exit 1
+# This script does not handle file names that contain spaces.
+gofiles=$(git diff --name-only --diff-filter=ACM | grep '\.go$' || echo "")
+
+if [ -z "$gofiles" ]; then
+  echo "No lint issue"
+  exit 0
 fi
+
+# Run on one file at a time because a single invocation of golint
+# with multiple files requires the files to all be in one package.
+for gofile in $gofiles
+do
+	errcount=$($GOLINTPATH $gofile | wc -l)
+	if [ "$errcount" -gt "0" ]; then
+		errors=YES
+		echo "$errcount lint suggestions in:"
+		echo "golint $gofile"
+	fi
+done
+
+[ -z "$errors" ] && exit 0
+
+echo "Golint must pass before commit!"
+exit 1
