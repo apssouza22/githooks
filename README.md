@@ -6,10 +6,9 @@ In this project we are using the golint check on pre-commit and go test on pre-p
 
 ## How to use
 - Clone the project wherever you like `git clone https://github.com/apssouza22/githooks`
-- Go into your git repository and run the `install-hooks.sh`, you will need to point to where you have cloned the project
+- Go into your git repository and run the `PATH/TO/THIS/REPO/install-hooks.sh`
 - Now change something, and try to commit
 ``` bash
-echo "change!" >> README.md
 git commit -am "test change"
 >> Running pre-commit hook
 >> Running Golint
