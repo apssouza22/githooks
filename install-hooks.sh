@@ -3,9 +3,9 @@
 GIT_DIR=$(git rev-parse --git-dir)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-if [ ! -f $GOPATH/bin/golint ]; then
-  echo "Downloading the Golint..."
-  go get -u golang.org/x/lint/golint
+if [ ! -x "$(command -v golangci-lint)" ]; then
+  echo "Please install golangci-lint. Run brew install golangci/tap/golangci-lint"
+  exit 1
 fi
 
 echo "Installing hooks..."
