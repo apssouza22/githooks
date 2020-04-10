@@ -10,17 +10,22 @@ fi
 
 echo "Installing hooks..."
 chmod +x "$SCRIPT_DIR"/pre-commit.sh
+chmod +x "$SCRIPT_DIR"/prepare-commit-msg.sh
 chmod +x "$SCRIPT_DIR"/pre-push.sh
 
 
-if [ -f "$GIT_DIR"/hooks/pre-push  ]; then
+if [ -f "$GIT_DIR"/hooks/pre-commit  ]; then
   echo "WARNING:: You already have a pre-commit hook in your project. You will need to update it manually."
+fi
+if [ -f "$GIT_DIR"/hooks/prepare-commit-msg  ]; then
+  echo "WARNING:: You already have a prepare-commit-msg hook in your project. You will need to update it manually."
 fi
 if [ -f "$GIT_DIR"/hooks/pre-push ]; then
   echo "WARNING:: You already have a pre-push hook in your project. You will need to update it manually."
 fi
 
 cp "$SCRIPT_DIR"/pre-commit.sh $GIT_DIR/hooks/pre-commit
+cp "$SCRIPT_DIR"/prepare-commit-msg.sh $GIT_DIR/hooks/prepare-commit-msg
 cp "$SCRIPT_DIR"/pre-push.sh $GIT_DIR/hooks/pre-push
 
 echo "Done!"
