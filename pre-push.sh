@@ -6,4 +6,4 @@ echo "Running pre-push hook..."
 
 echo "Running go test ./... -tags=all,unit,integration"
 cd "$HOOK_DIR/../.."
-go test ./... -tags=all,unit,integration
+go test ./...
