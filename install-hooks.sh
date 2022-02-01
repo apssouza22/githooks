@@ -5,7 +5,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ ! -x "$(command -v golangci-lint)" ]; then
   echo "Please install golangci-lint. Run brew install golangci/tap/golangci-lint"
-  exit 1
 fi
 
 echo "Installing hooks..."
